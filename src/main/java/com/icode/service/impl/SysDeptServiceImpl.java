@@ -88,6 +88,4 @@ public class SysDeptServiceImpl implements SysDeptService {
         }
         return dept.getLevel();
     }
-
-
 }
