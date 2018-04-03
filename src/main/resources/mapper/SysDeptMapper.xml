@@ -30,9 +30,9 @@
       level, seq, remark, 
       operator, operate_time, operate_ip
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
-      #{level,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
-      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
+    values (#{record.id,jdbcType=INTEGER}, #{record.name,jdbcType=VARCHAR}, #{record.parentId,jdbcType=INTEGER},
+      #{record.level,jdbcType=VARCHAR}, #{record.seq,jdbcType=INTEGER}, #{record.remark,jdbcType=VARCHAR},
+      #{record.operator,jdbcType=VARCHAR}, #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.icode.model.SysDept" >
@@ -68,31 +68,31 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{record.id,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+        #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null" >
-        #{parentId,jdbcType=INTEGER},
+        #{record.parentId,jdbcType=INTEGER},
       </if>
       <if test="level != null" >
-        #{level,jdbcType=VARCHAR},
+        #{record.level,jdbcType=VARCHAR},
       </if>
       <if test="seq != null" >
-        #{seq,jdbcType=INTEGER},
+        #{record.seq,jdbcType=INTEGER},
       </if>
       <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
+        #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="operator != null" >
-        #{operator,jdbcType=VARCHAR},
+        #{record.operator,jdbcType=VARCHAR},
       </if>
       <if test="operateTime != null" >
-        #{operateTime,jdbcType=TIMESTAMP},
+        #{record.operateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="operateIp != null" >
-        #{operateIp,jdbcType=VARCHAR},
+        #{record.operateIp,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -100,43 +100,43 @@
     update sys_dept
     <set >
       <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null" >
-        parent_id = #{parentId,jdbcType=INTEGER},
+        parent_id = #{record.parentId,jdbcType=INTEGER},
       </if>
       <if test="level != null" >
-        level = #{level,jdbcType=VARCHAR},
+        level = #{record.level,jdbcType=VARCHAR},
       </if>
       <if test="seq != null" >
-        seq = #{seq,jdbcType=INTEGER},
+        seq = #{record.seq,jdbcType=INTEGER},
       </if>
       <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="operator != null" >
-        operator = #{operator,jdbcType=VARCHAR},
+        operator = #{record.operator,jdbcType=VARCHAR},
       </if>
       <if test="operateTime != null" >
-        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+        operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="operateIp != null" >
-        operate_ip = #{operateIp,jdbcType=VARCHAR},
+        operate_ip = #{record.operateIp,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.icode.model.SysDept" >
     update sys_dept
-    set name = #{name,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=INTEGER},
-      level = #{level,jdbcType=VARCHAR},
-      seq = #{seq,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      operator = #{operator,jdbcType=VARCHAR},
-      operate_time = #{operateTime,jdbcType=TIMESTAMP},
-      operate_ip = #{operateIp,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    set name = #{record.name,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=VARCHAR},
+      seq = #{record.seq,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
 
   <select id="getAllDept" resultMap="BaseResultMap">
@@ -155,16 +155,18 @@
   <update id="batchUpdateLevel" parameterType="map">
     <foreach collection="sysDeptList" item="sysDept" separator=";">
       UPDATE sys_dept
-      SET level = #{dept.level}
-      WHERE id = #{dept.id}
+      SET level = #{sysDept.level}
+      WHERE id = #{sysDept.id}
     </foreach>
   </update>
 
   <select id="countByNameAndParentId" parameterType="map" resultType="int">
     SELECT COUNT(1)
     FROM sys_dept
-    WHERE parent_id = #{parentId}
-    AND name = #{name}
+    WHERE name = #{name}
+    <if test="parentId != null">
+      AND parent_id = #{parentId}
+    </if>
     <if test="id != null">
       AND id != #{id}
     </if>

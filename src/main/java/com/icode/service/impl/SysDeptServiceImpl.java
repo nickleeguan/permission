@@ -40,6 +40,9 @@ public class SysDeptServiceImpl implements SysDeptService {
     public void update(DeptParam param) {
         BeanValidator.check(param);
 
+        if(checkExist(param.getParentId(), param.getName(), param.getId())) {
+            throw new ParamException("同一层级下存在相同名称的部门");
+        }
         SysDept before = sysDeptMapper.selectByPrimaryKey(param.getId());
         Preconditions.checkNotNull(before, "待更新的部门不存在");
 
@@ -49,7 +52,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         after.setOperateIp("127.0.0.1");//todo
         after.setOperateTime(new Date());
 
-
+        updateWithChild(before, after);
     }
 
     @Transactional

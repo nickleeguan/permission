@@ -4,8 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 
 @ToString
@@ -16,7 +17,7 @@ public class DeptParam {
     @Length(max = 15, min = 2, message = "部门名称不合规范")
     private String name;
 
-    private Integer parentId;
+    private Integer parentId = 0;
 
     @NotNull(message = "展示顺序不可为空")
     private Integer seq;
