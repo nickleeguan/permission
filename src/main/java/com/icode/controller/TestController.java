@@ -1,9 +1,13 @@
 package com.icode.controller;
 
+import com.icode.common.ApplicationContextHelper;
 import com.icode.common.JsonData;
+import com.icode.dao.SysAclModuleMapper;
 import com.icode.exception.ParamException;
+import com.icode.model.SysAclModule;
 import com.icode.param.TestVo;
 import com.icode.util.BeanValidator;
+import com.icode.util.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
@@ -32,8 +36,11 @@ public class TestController {
     @ResponseBody
     public JsonData validate(TestVo vo) throws ParamException{
         log.info("validate");
-        BeanValidator.check(vo);
 
+        SysAclModuleMapper moduleMapper = ApplicationContextHelper.popBean(SysAclModuleMapper.class);
+        SysAclModule module = moduleMapper.selectByPrimaryKey(1);
+        log.info(JsonMapper.obj2String(module));
+        BeanValidator.check(vo);
         return JsonData.success("test validate");
     }
 }

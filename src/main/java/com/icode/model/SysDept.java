@@ -1,5 +1,6 @@
 package com.icode.model;
 
+
 import java.util.Date;
 
 public class SysDept {
@@ -20,6 +21,34 @@ public class SysDept {
     private Date operateTime;
 
     private String operateIp;
+
+    public SysDept() {
+    }
+
+    public SysDept(String name, Integer parentId, Integer seq, String remark) {
+        this.name = name;
+        this.parentId = parentId;
+        this.seq = seq;
+        this.remark = remark;
+    }
+
+
+    public SysDept(Integer id, String name, Integer parentId, Integer seq, String remark) {
+        this.id = id;
+        this.name = name;
+        this.parentId = parentId;
+        this.seq = seq;
+        this.remark = remark;
+    }
+
+    public SysDept(Integer id, String name, Integer parentId, String level, Integer seq, String remark) {
+        this.id = id;
+        this.name = name;
+        this.parentId = parentId;
+        this.level = level;
+        this.seq = seq;
+        this.remark = remark;
+    }
 
     public Integer getId() {
         return id;

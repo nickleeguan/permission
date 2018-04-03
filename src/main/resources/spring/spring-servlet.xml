@@ -10,10 +10,15 @@
     <!--启动注解驱动的spring mvc功能-->
     <mvc:annotation-driven/>
 
+    <mvc:interceptors>
+        <bean class="com.icode.common.HttpInterceptor" />
+    </mvc:interceptors>
+
     <!--启动包扫描功能 配置自动扫描-->
     <context:component-scan base-package="com.icode.controller"/>
     <context:component-scan base-package="com.icode.service"/>
 
+    <bean class="com.icode.common.ApplicationContextHelper" lazy-init="false" />
 
     <bean class="com.icode.common.SpringExceptionResolver"/>
     <!--配置 requestMapping注解的处理接口-->

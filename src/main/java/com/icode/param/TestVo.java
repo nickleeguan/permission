@@ -22,6 +22,6 @@ public class TestVo {
     @Min(0)
     private Integer id;
 
-    @NotEmpty
+
     private List<String> strs;
 }
