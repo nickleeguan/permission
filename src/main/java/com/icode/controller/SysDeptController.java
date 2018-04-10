@@ -28,7 +28,7 @@ public class SysDeptController {
     @Autowired
     private SysTreeService sysTreeService;
 
-    @RequestMapping("page.json")
+    @RequestMapping("dept.page")
     public ModelAndView page(){
         return new ModelAndView("dept");
     }
