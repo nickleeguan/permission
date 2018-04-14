@@ -1,5 +1,7 @@
 package com.icode.controller;
 
+import com.icode.beans.PageQuery;
+import com.icode.beans.PageResult;
 import com.icode.common.JsonData;
 import com.icode.param.UserParam;
 import com.icode.service.interfaces.SysUserService;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.print.attribute.standard.JobSheets;
@@ -33,5 +36,13 @@ public class SysUserController {
     public JsonData updateUser(@ModelAttribute UserParam param){
         sysUserService.update(param);
         return JsonData.success();
+    }
+
+    @RequestMapping("page.json")
+    @ResponseBody
+    public JsonData page(@RequestParam("deptId") int deptId,
+                         @ModelAttribute PageQuery pageQuery){
+        PageResult result = sysUserService.getPageByDeptId(deptId, pageQuery);
+        return JsonData.success(result);
     }
 }

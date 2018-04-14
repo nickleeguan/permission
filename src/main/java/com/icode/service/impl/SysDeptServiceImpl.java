@@ -1,12 +1,14 @@
 package com.icode.service.impl;
 
 import com.google.common.base.Preconditions;
+import com.icode.common.RequestHolder;
 import com.icode.dao.SysDeptMapper;
 import com.icode.exception.ParamException;
 import com.icode.model.SysDept;
 import com.icode.param.DeptParam;
 import com.icode.service.interfaces.SysDeptService;
 import com.icode.util.BeanValidator;
+import com.icode.util.IpUtil;
 import com.icode.util.LevelUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -30,8 +32,8 @@ public class SysDeptServiceImpl implements SysDeptService {
         SysDept dept = new SysDept(param.getName(), param.getParentId(), param.getSeq(), param.getRemark());
 
         dept.setLevel(LevelUtil.calculateLevel(getLevel(param.getParentId()), param.getParentId()));
-        dept.setOperator("system");//todo
-        dept.setOperateIp("127.0.0.1");//todo
+        dept.setOperator(RequestHolder.getCurrentUser().getUsername());
+        dept.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));//todo
         dept.setOperateTime(new Date());
 
         sysDeptMapper.insert(dept);
@@ -48,8 +50,8 @@ public class SysDeptServiceImpl implements SysDeptService {
 
         SysDept after = new SysDept(param.getId(), param.getName(), param.getParentId(), param.getSeq(), param.getRemark());
         after.setLevel(LevelUtil.calculateLevel(getLevel(param.getParentId()), param.getParentId()));
-        after.setOperator("system-update");//todo
-        after.setOperateIp("127.0.0.1");//todo
+        after.setOperator(RequestHolder.getCurrentUser().getUsername());
+        after.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));//todo
         after.setOperateTime(new Date());
 
         updateWithChild(before, after);

@@ -1,5 +1,6 @@
 package com.icode.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class SysUser {
@@ -44,6 +45,20 @@ public class SysUser {
         this.deptId = deptId;
         this.status = status;
         this.remark = remark;
+    }
+
+    public SysUser(Integer id, String username, String telephone, String mail, String password, Integer deptId, Integer status, String remark, String operator, Timestamp operateTime, String operateIp) {
+        this.id = id;
+        this.username = username;
+        this.telephone = telephone;
+        this.mail = mail;
+        this.password = password;
+        this.deptId = deptId;
+        this.status = status;
+        this.remark = remark;
+        this.operator = operator;
+        this.operateTime = operateTime;
+        this.operateIp = operateIp;
     }
 
     public Integer getId() {

@@ -34,6 +34,8 @@ public class HttpInterceptor extends HandlerInterceptorAdapter{
 //        long end = System.currentTimeMillis();
 //
 //        logger.info("request finished, url:{},cost{}", url, end - start);
+
+        removeThreadLocalInfo();
     }
 
     @Override
@@ -44,5 +46,11 @@ public class HttpInterceptor extends HandlerInterceptorAdapter{
         long end = System.currentTimeMillis();
 
         logger.info("request complete, url:{},cost{}", url, end - start);
+
+        removeThreadLocalInfo();
+    }
+
+    public void removeThreadLocalInfo(){
+        RequestHolder.remove();
     }
 }

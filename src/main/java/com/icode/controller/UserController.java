@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -24,6 +23,12 @@ public class UserController {
     @Resource
     private SysUserService sysUserService;
 
+    @RequestMapping("logout.page")
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().invalidate();
+        String path = "signin.jsp";
+        response.sendRedirect(path);
+    }
 
     @RequestMapping("login.page")
     public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
