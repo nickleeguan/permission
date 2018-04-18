@@ -3,9 +3,11 @@ package com.icode.dao;
 import com.icode.beans.PageQuery;
 import com.icode.model.SysUser;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SysUserMapper {
     int deleteByPrimaryKey(Integer id);
 

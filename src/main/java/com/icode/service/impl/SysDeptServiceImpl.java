@@ -67,8 +67,9 @@ public class SysDeptServiceImpl implements SysDeptService {
             if (CollectionUtils.isNotEmpty(deptList)){
                 for (SysDept dept : deptList) {
                     String level = dept.getLevel();
-                    if (level.indexOf(oldLevelPrefix) == 0){
-                        level = newLevelPrefix + level.substring(oldLevelPrefix.length());
+                    if (level.indexOf(oldLevelPrefix + "." + after.getId()) == 0){
+                        String str = level.substring(oldLevelPrefix.length());
+                        level = newLevelPrefix + str;
                         dept.setLevel(level);
                     }
                 }

@@ -27,6 +27,42 @@ public class SysAcl {
 
     private String operateIp;
 
+    public SysAcl() {
+    }
+
+    public SysAcl(Integer id, String code, String name, Integer aclModuleId, String url, Integer type, Integer status, Integer seq, String remark) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.aclModuleId = aclModuleId;
+        this.url = url;
+        this.type = type;
+        this.status = status;
+        this.seq = seq;
+        this.remark = remark;
+    }
+
+    public SysAcl(String code, String name, Integer aclModuleId, String url, Integer type, Integer status, Integer seq, String remark) {
+        this.code = code;
+        this.name = name;
+        this.aclModuleId = aclModuleId;
+        this.url = url;
+        this.type = type;
+        this.status = status;
+        this.seq = seq;
+        this.remark = remark;
+    }
+
+    public SysAcl(String name, Integer aclModuleId, String url, Integer type, Integer status, Integer seq, String remark) {
+        this.name = name;
+        this.aclModuleId = aclModuleId;
+        this.url = url;
+        this.type = type;
+        this.status = status;
+        this.seq = seq;
+        this.remark = remark;
+    }
+
     public Integer getId() {
         return id;
     }

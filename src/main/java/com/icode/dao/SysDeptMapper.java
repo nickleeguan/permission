@@ -2,9 +2,11 @@ package com.icode.dao;
 
 import com.icode.model.SysDept;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SysDeptMapper {
     int deleteByPrimaryKey(@Param("id") Integer id);
 

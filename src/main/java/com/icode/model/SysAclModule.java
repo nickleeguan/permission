@@ -23,6 +23,39 @@ public class SysAclModule {
 
     private String operateIp;
 
+    public SysAclModule(Integer id, String name, Integer parentId, String level, Integer seq, Integer status, String remark, String operator, Date operateTime, String operateIp) {
+        this.id = id;
+        this.name = name;
+        this.parentId = parentId;
+        this.level = level;
+        this.seq = seq;
+        this.status = status;
+        this.remark = remark;
+        this.operator = operator;
+        this.operateTime = operateTime;
+        this.operateIp = operateIp;
+    }
+
+    public SysAclModule() {
+    }
+
+    public SysAclModule(String name, Integer parentId, Integer seq, Integer status, String remark) {
+        this.name = name;
+        this.parentId = parentId;
+        this.seq = seq;
+        this.status = status;
+        this.remark = remark;
+    }
+
+    public SysAclModule(Integer id, String name, Integer parentId, Integer seq, Integer status, String remark) {
+        this.id = id;
+        this.name = name;
+        this.parentId = parentId;
+        this.seq = seq;
+        this.status = status;
+        this.remark = remark;
+    }
+
     public Integer getId() {
         return id;
     }

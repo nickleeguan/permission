@@ -1,7 +1,9 @@
 package com.icode.dao;
 
 import com.icode.model.SysRole;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysRoleMapper {
     int deleteByPrimaryKey(Integer id);
 
