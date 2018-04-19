@@ -169,4 +169,18 @@ public class SysAcl {
     public void setOperateIp(String operateIp) {
         this.operateIp = operateIp == null ? null : operateIp.trim();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof SysAcl){
+            SysAcl acl = (SysAcl) obj;
+            return id.equals(acl.getId());
+        }
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

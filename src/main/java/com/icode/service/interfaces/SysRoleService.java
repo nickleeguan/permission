@@ -11,6 +11,7 @@ public interface SysRoleService {
     void saveRole(RoleParam param);
 
     void updateRole(RoleParam param);
+
     List<SysRole> getAll();
 
 }

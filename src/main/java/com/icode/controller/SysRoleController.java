@@ -3,14 +3,12 @@ package com.icode.controller;
 import com.icode.common.JsonData;
 import com.icode.param.RoleParam;
 import com.icode.service.interfaces.SysRoleService;
+import com.icode.service.interfaces.SysTreeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -21,6 +19,9 @@ public class SysRoleController {
 
     @Autowired
     private SysRoleService sysRoleService;
+
+    @Autowired
+    private SysTreeService sysTreeService;
 
     @RequestMapping("role.page")
     public ModelAndView page(){
@@ -45,5 +46,12 @@ public class SysRoleController {
     @ResponseBody
     public JsonData list(){
         return JsonData.success(sysRoleService.getAll());
+    }
+
+    @RequestMapping("roleTree.json")
+    @ResponseBody
+    public JsonData roleTree(@RequestParam("roleId") int roleId){
+
+        return JsonData.success(sysTreeService.roleTree(roleId));
     }
 }
