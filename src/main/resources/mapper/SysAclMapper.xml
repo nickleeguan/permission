@@ -35,10 +35,10 @@
       status, seq, remark, 
       operator, operate_time, operate_ip
       )
-    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{aclModuleId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
-      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
+    values (#{record.id,jdbcType=INTEGER}, #{record.code,jdbcType=VARCHAR}, #{record.name,jdbcType=VARCHAR},
+      #{record.aclModuleId,jdbcType=INTEGER}, #{record.url,jdbcType=VARCHAR}, #{record.type,jdbcType=INTEGER},
+      #{record.status,jdbcType=INTEGER}, #{record.seq,jdbcType=INTEGER}, #{record.remark,jdbcType=VARCHAR}, 
+      #{record.operator,jdbcType=VARCHAR}, #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.icode.model.SysAcl" >
@@ -174,4 +174,29 @@
       operate_ip = #{operateIp,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="countByNameAndAclModuleId" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM sys_acl
+    WHERE acl_module_id = #{aclModuleId}
+    and name = #{name}
+    <if test="id != null">
+      and id != #{id}
+    </if>
+  </select>
+
+  <select id="countByAclModuleId" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM sys_acl
+    WHERE  acl_module_id = #{aclModuleId}
+  </select>
+
+  <select id="getPageByAclModuleId" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM sys_acl
+    WHERE acl_module_id = #{aclModuleId}
+    ORDER BY seq asc, name ASC
+    limit #{page.offset}, #{page.pageSize}
+  </select>
 </mapper>

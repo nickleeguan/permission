@@ -3,23 +3,22 @@ package com.icode.dao;
 import com.icode.beans.PageQuery;
 import com.icode.model.SysUser;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface SysUserMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(SysUser record);
+public interface SysUserMapper {
+    int deleteByPrimaryKey(@Param("id") Integer id);
+
+    int insert(@Param("record") SysUser record);
 
     int insertSelective(SysUser record);
 
-    SysUser selectByPrimaryKey(Integer id);
+    SysUser selectByPrimaryKey(@Param("id") Integer id);
 
     int updateByPrimaryKeySelective(SysUser record);
 
-    int updateByPrimaryKey(SysUser record);
+    int updateByPrimaryKey(@Param("record") SysUser record);
 
     SysUser findByKeyword(@Param("keyword") String keyword);
 

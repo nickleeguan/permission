@@ -42,6 +42,17 @@ public class SysAcl {
         this.remark = remark;
     }
 
+    public SysAcl(Integer id, String name, Integer aclModuleId, String url, Integer type, Integer status, Integer seq, String remark) {
+        this.id = id;
+        this.name = name;
+        this.aclModuleId = aclModuleId;
+        this.url = url;
+        this.type = type;
+        this.status = status;
+        this.seq = seq;
+        this.remark = remark;
+    }
+
     public SysAcl(String code, String name, Integer aclModuleId, String url, Integer type, Integer status, Integer seq, String remark) {
         this.code = code;
         this.name = name;

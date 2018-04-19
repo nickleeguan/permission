@@ -51,7 +51,7 @@ public class SysUserServiceImpl implements SysUserService {
 
         // TODO:send Email
 
-        sysUserMapper.insertSelective(user);
+        sysUserMapper.insert(user);
     }
 
     public void update(UserParam param){

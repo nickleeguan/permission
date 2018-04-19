@@ -8,17 +8,17 @@ import java.util.List;
 
 @Repository
 public interface SysDeptMapper {
-    int deleteByPrimaryKey(@Param("id") Integer id);
+    int deleteByPrimaryKey(Integer id);
 
-    int insert(@Param("record") SysDept record);
+    int insert(SysDept record);
 
-    int insertSelective(@Param("record") SysDept record);
+    int insertSelective(SysDept record);
 
-    SysDept selectByPrimaryKey(@Param("id") Integer id);
+    SysDept selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(@Param("record") SysDept record);
+    int updateByPrimaryKeySelective(SysDept record);
 
-    int updateByPrimaryKey(@Param("record") SysDept record);
+    int updateByPrimaryKey(SysDept record);
 
     List<SysDept> getAllDept();
 

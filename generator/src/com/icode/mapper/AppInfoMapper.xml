@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icode.dao.AppInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.icode.model.AppInfo" >
+    <id column="app_id" property="appId" jdbcType="BIGINT" />
+    <result column="app_name" property="appName" jdbcType="VARCHAR" />
+    <result column="app_logo" property="appLogo" jdbcType="VARCHAR" />
+    <result column="app_platform" property="appPlatform" jdbcType="VARCHAR" />
+    <result column="app_type" property="appType" jdbcType="VARCHAR" />
+    <result column="app_desc" property="appDesc" jdbcType="VARCHAR" />
+    <result column="app_status" property="appStatus" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="app_show" property="appShow" jdbcType="VARCHAR" />
+    <result column="app_url" property="appUrl" jdbcType="VARCHAR" />
+    <result column="app_key" property="appKey" jdbcType="VARCHAR" />
+    <result column="app_ip" property="appIp" jdbcType="VARCHAR" />
+    <result column="ext_a" property="extA" jdbcType="VARCHAR" />
+    <result column="ext_b" property="extB" jdbcType="VARCHAR" />
+    <result column="ext_c" property="extC" jdbcType="VARCHAR" />
+    <result column="ext_d" property="extD" jdbcType="VARCHAR" />
+    <result column="rsa_public" property="rsaPublic" jdbcType="VARCHAR" />
+    <result column="rsa_private" property="rsaPrivate" jdbcType="VARCHAR" />
+    <result column="enc_type" property="encType" jdbcType="CHAR" />
+    <result column="app_domain" property="appDomain" jdbcType="VARCHAR" />
+    <result column="redirect_uri" property="redirectUri" jdbcType="VARCHAR" />
+    <result column="online_time" property="onlineTime" jdbcType="TIMESTAMP" />
+    <result column="grant_types" property="grantTypes" jdbcType="VARCHAR" />
+    <result column="latest_status" property="latestStatus" jdbcType="VARCHAR" />
+    <result column="dev_opr_valid" property="devOprValid" jdbcType="CHAR" />
+    <result column="channel_id" property="channelId" jdbcType="BIGINT" />
+    <result column="sign_method" property="signMethod" jdbcType="VARCHAR" />
+    <result column="encrypt_method" property="encryptMethod" jdbcType="VARCHAR" />
+    <result column="encrypt_type" property="encryptType" jdbcType="CHAR" />
+    <result column="encrypt_secret" property="encryptSecret" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    app_id, app_name, app_logo, app_platform, app_type, app_desc, app_status, create_id, 
+    create_time, app_show, app_url, app_key, app_ip, ext_a, ext_b, ext_c, ext_d, rsa_public, 
+    rsa_private, enc_type, app_domain, redirect_uri, online_time, grant_types, latest_status, 
+    dev_opr_valid, channel_id, sign_method, encrypt_method, encrypt_type, encrypt_secret
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from aop_appinfo
+    where app_id = #{appId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from aop_appinfo
+    where app_id = #{appId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.icode.model.AppInfo" >
+    insert into aop_appinfo (app_id, app_name, app_logo, 
+      app_platform, app_type, app_desc, 
+      app_status, create_id, create_time, 
+      app_show, app_url, app_key, 
+      app_ip, ext_a, ext_b, 
+      ext_c, ext_d, rsa_public, 
+      rsa_private, enc_type, app_domain, 
+      redirect_uri, online_time, grant_types, 
+      latest_status, dev_opr_valid, channel_id, 
+      sign_method, encrypt_method, encrypt_type, 
+      encrypt_secret)
+    values (#{appId,jdbcType=BIGINT}, #{appName,jdbcType=VARCHAR}, #{appLogo,jdbcType=VARCHAR}, 
+      #{appPlatform,jdbcType=VARCHAR}, #{appType,jdbcType=VARCHAR}, #{appDesc,jdbcType=VARCHAR}, 
+      #{appStatus,jdbcType=VARCHAR}, #{createId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{appShow,jdbcType=VARCHAR}, #{appUrl,jdbcType=VARCHAR}, #{appKey,jdbcType=VARCHAR}, 
+      #{appIp,jdbcType=VARCHAR}, #{extA,jdbcType=VARCHAR}, #{extB,jdbcType=VARCHAR}, 
+      #{extC,jdbcType=VARCHAR}, #{extD,jdbcType=VARCHAR}, #{rsaPublic,jdbcType=VARCHAR}, 
+      #{rsaPrivate,jdbcType=VARCHAR}, #{encType,jdbcType=CHAR}, #{appDomain,jdbcType=VARCHAR}, 
+      #{redirectUri,jdbcType=VARCHAR}, #{onlineTime,jdbcType=TIMESTAMP}, #{grantTypes,jdbcType=VARCHAR}, 
+      #{latestStatus,jdbcType=VARCHAR}, #{devOprValid,jdbcType=CHAR}, #{channelId,jdbcType=BIGINT}, 
+      #{signMethod,jdbcType=VARCHAR}, #{encryptMethod,jdbcType=VARCHAR}, #{encryptType,jdbcType=CHAR}, 
+      #{encryptSecret,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.icode.model.AppInfo" >
+    insert into aop_appinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="appName != null" >
+        app_name,
+      </if>
+      <if test="appLogo != null" >
+        app_logo,
+      </if>
+      <if test="appPlatform != null" >
+        app_platform,
+      </if>
+      <if test="appType != null" >
+        app_type,
+      </if>
+      <if test="appDesc != null" >
+        app_desc,
+      </if>
+      <if test="appStatus != null" >
+        app_status,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="appShow != null" >
+        app_show,
+      </if>
+      <if test="appUrl != null" >
+        app_url,
+      </if>
+      <if test="appKey != null" >
+        app_key,
+      </if>
+      <if test="appIp != null" >
+        app_ip,
+      </if>
+      <if test="extA != null" >
+        ext_a,
+      </if>
+      <if test="extB != null" >
+        ext_b,
+      </if>
+      <if test="extC != null" >
+        ext_c,
+      </if>
+      <if test="extD != null" >
+        ext_d,
+      </if>
+      <if test="rsaPublic != null" >
+        rsa_public,
+      </if>
+      <if test="rsaPrivate != null" >
+        rsa_private,
+      </if>
+      <if test="encType != null" >
+        enc_type,
+      </if>
+      <if test="appDomain != null" >
+        app_domain,
+      </if>
+      <if test="redirectUri != null" >
+        redirect_uri,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+      <if test="grantTypes != null" >
+        grant_types,
+      </if>
+      <if test="latestStatus != null" >
+        latest_status,
+      </if>
+      <if test="devOprValid != null" >
+        dev_opr_valid,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="signMethod != null" >
+        sign_method,
+      </if>
+      <if test="encryptMethod != null" >
+        encrypt_method,
+      </if>
+      <if test="encryptType != null" >
+        encrypt_type,
+      </if>
+      <if test="encryptSecret != null" >
+        encrypt_secret,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="appId != null" >
+        #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="appName != null" >
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="appLogo != null" >
+        #{appLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="appPlatform != null" >
+        #{appPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="appType != null" >
+        #{appType,jdbcType=VARCHAR},
+      </if>
+      <if test="appDesc != null" >
+        #{appDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="appStatus != null" >
+        #{appStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appShow != null" >
+        #{appShow,jdbcType=VARCHAR},
+      </if>
+      <if test="appUrl != null" >
+        #{appUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null" >
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="appIp != null" >
+        #{appIp,jdbcType=VARCHAR},
+      </if>
+      <if test="extA != null" >
+        #{extA,jdbcType=VARCHAR},
+      </if>
+      <if test="extB != null" >
+        #{extB,jdbcType=VARCHAR},
+      </if>
+      <if test="extC != null" >
+        #{extC,jdbcType=VARCHAR},
+      </if>
+      <if test="extD != null" >
+        #{extD,jdbcType=VARCHAR},
+      </if>
+      <if test="rsaPublic != null" >
+        #{rsaPublic,jdbcType=VARCHAR},
+      </if>
+      <if test="rsaPrivate != null" >
+        #{rsaPrivate,jdbcType=VARCHAR},
+      </if>
+      <if test="encType != null" >
+        #{encType,jdbcType=CHAR},
+      </if>
+      <if test="appDomain != null" >
+        #{appDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="redirectUri != null" >
+        #{redirectUri,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grantTypes != null" >
+        #{grantTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="latestStatus != null" >
+        #{latestStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devOprValid != null" >
+        #{devOprValid,jdbcType=CHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="signMethod != null" >
+        #{signMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptMethod != null" >
+        #{encryptMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptType != null" >
+        #{encryptType,jdbcType=CHAR},
+      </if>
+      <if test="encryptSecret != null" >
+        #{encryptSecret,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.icode.model.AppInfo" >
+    update aop_appinfo
+    <set >
+      <if test="appName != null" >
+        app_name = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="appLogo != null" >
+        app_logo = #{appLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="appPlatform != null" >
+        app_platform = #{appPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="appType != null" >
+        app_type = #{appType,jdbcType=VARCHAR},
+      </if>
+      <if test="appDesc != null" >
+        app_desc = #{appDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="appStatus != null" >
+        app_status = #{appStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appShow != null" >
+        app_show = #{appShow,jdbcType=VARCHAR},
+      </if>
+      <if test="appUrl != null" >
+        app_url = #{appUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null" >
+        app_key = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="appIp != null" >
+        app_ip = #{appIp,jdbcType=VARCHAR},
+      </if>
+      <if test="extA != null" >
+        ext_a = #{extA,jdbcType=VARCHAR},
+      </if>
+      <if test="extB != null" >
+        ext_b = #{extB,jdbcType=VARCHAR},
+      </if>
+      <if test="extC != null" >
+        ext_c = #{extC,jdbcType=VARCHAR},
+      </if>
+      <if test="extD != null" >
+        ext_d = #{extD,jdbcType=VARCHAR},
+      </if>
+      <if test="rsaPublic != null" >
+        rsa_public = #{rsaPublic,jdbcType=VARCHAR},
+      </if>
+      <if test="rsaPrivate != null" >
+        rsa_private = #{rsaPrivate,jdbcType=VARCHAR},
+      </if>
+      <if test="encType != null" >
+        enc_type = #{encType,jdbcType=CHAR},
+      </if>
+      <if test="appDomain != null" >
+        app_domain = #{appDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="redirectUri != null" >
+        redirect_uri = #{redirectUri,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grantTypes != null" >
+        grant_types = #{grantTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="latestStatus != null" >
+        latest_status = #{latestStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devOprValid != null" >
+        dev_opr_valid = #{devOprValid,jdbcType=CHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="signMethod != null" >
+        sign_method = #{signMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptMethod != null" >
+        encrypt_method = #{encryptMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptType != null" >
+        encrypt_type = #{encryptType,jdbcType=CHAR},
+      </if>
+      <if test="encryptSecret != null" >
+        encrypt_secret = #{encryptSecret,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where app_id = #{appId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.icode.model.AppInfo" >
+    update aop_appinfo
+    set app_name = #{appName,jdbcType=VARCHAR},
+      app_logo = #{appLogo,jdbcType=VARCHAR},
+      app_platform = #{appPlatform,jdbcType=VARCHAR},
+      app_type = #{appType,jdbcType=VARCHAR},
+      app_desc = #{appDesc,jdbcType=VARCHAR},
+      app_status = #{appStatus,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      app_show = #{appShow,jdbcType=VARCHAR},
+      app_url = #{appUrl,jdbcType=VARCHAR},
+      app_key = #{appKey,jdbcType=VARCHAR},
+      app_ip = #{appIp,jdbcType=VARCHAR},
+      ext_a = #{extA,jdbcType=VARCHAR},
+      ext_b = #{extB,jdbcType=VARCHAR},
+      ext_c = #{extC,jdbcType=VARCHAR},
+      ext_d = #{extD,jdbcType=VARCHAR},
+      rsa_public = #{rsaPublic,jdbcType=VARCHAR},
+      rsa_private = #{rsaPrivate,jdbcType=VARCHAR},
+      enc_type = #{encType,jdbcType=CHAR},
+      app_domain = #{appDomain,jdbcType=VARCHAR},
+      redirect_uri = #{redirectUri,jdbcType=VARCHAR},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      grant_types = #{grantTypes,jdbcType=VARCHAR},
+      latest_status = #{latestStatus,jdbcType=VARCHAR},
+      dev_opr_valid = #{devOprValid,jdbcType=CHAR},
+      channel_id = #{channelId,jdbcType=BIGINT},
+      sign_method = #{signMethod,jdbcType=VARCHAR},
+      encrypt_method = #{encryptMethod,jdbcType=VARCHAR},
+      encrypt_type = #{encryptType,jdbcType=CHAR},
+      encrypt_secret = #{encryptSecret,jdbcType=VARCHAR}
+    where app_id = #{appId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -39,7 +39,7 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
         aclModule.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
         aclModule.setOperateTime(new Date());
 
-        sysAclModuleMapper.insertSelective(aclModule);
+        sysAclModuleMapper.insert(aclModule);
     }
 
     public void update(AclModuleParam param) {

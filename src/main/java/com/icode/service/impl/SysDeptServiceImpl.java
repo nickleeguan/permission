@@ -36,7 +36,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         dept.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));//todo
         dept.setOperateTime(new Date());
 
-        sysDeptMapper.insert(dept);
+        sysDeptMapper.insertSelective(dept);
     }
 
     public void update(DeptParam param) {

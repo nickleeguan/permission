@@ -37,8 +37,8 @@
       operator, operate_time, operate_ip, 
       status, old_value, new_value
       )
-    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, 
-      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER},
+      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR},
       #{status,jdbcType=INTEGER}, #{oldValue,jdbcType=LONGVARCHAR}, #{newValue,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -135,24 +135,24 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.icode.model.SysLogWithBLOBs" >
     update sys_log
-    set type = #{type,jdbcType=INTEGER},
-      target_id = #{targetId,jdbcType=INTEGER},
-      operator = #{operator,jdbcType=VARCHAR},
-      operate_time = #{operateTime,jdbcType=TIMESTAMP},
-      operate_ip = #{operateIp,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      old_value = #{oldValue,jdbcType=LONGVARCHAR},
-      new_value = #{newValue,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    set type = #{record.type,jdbcType=INTEGER},
+      target_id = #{record.targetId,jdbcType=INTEGER},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      old_value = #{record.oldValue,jdbcType=LONGVARCHAR},
+      new_value = #{record.newValue,jdbcType=LONGVARCHAR}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.icode.model.SysLog" >
     update sys_log
-    set type = #{type,jdbcType=INTEGER},
-      target_id = #{targetId,jdbcType=INTEGER},
-      operator = #{operator,jdbcType=VARCHAR},
-      operate_time = #{operateTime,jdbcType=TIMESTAMP},
-      operate_ip = #{operateIp,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    set type = #{record.type,jdbcType=INTEGER},
+      target_id = #{record.targetId,jdbcType=INTEGER},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
 </mapper>
