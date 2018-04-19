@@ -10,7 +10,7 @@ import java.util.List;
 public interface SysUserMapper {
     int deleteByPrimaryKey(@Param("id") Integer id);
 
-    int insert(@Param("record") SysUser record);
+    int insert(SysUser record);
 
     int insertSelective(SysUser record);
 
@@ -18,7 +18,7 @@ public interface SysUserMapper {
 
     int updateByPrimaryKeySelective(SysUser record);
 
-    int updateByPrimaryKey(@Param("record") SysUser record);
+    int updateByPrimaryKey(SysUser record);
 
     SysUser findByKeyword(@Param("keyword") String keyword);
 

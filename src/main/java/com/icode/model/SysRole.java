@@ -19,6 +19,35 @@ public class SysRole {
 
     private String operateIp;
 
+    public SysRole() {
+    }
+
+    public SysRole(Integer id, String name, Integer type, Integer status, String remark) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.status = status;
+        this.remark = remark;
+    }
+
+    public SysRole(Integer id, String name, Integer type, Integer status, String remark, String operator, Date operateTime, String operateIp) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.status = status;
+        this.remark = remark;
+        this.operator = operator;
+        this.operateTime = operateTime;
+        this.operateIp = operateIp;
+    }
+
+    public SysRole(String name, Integer type, Integer status, String remark) {
+        this.name = name;
+        this.type = type;
+        this.status = status;
+        this.remark = remark;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -4,6 +4,8 @@ import com.icode.model.SysRole;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface SysRoleMapper {
     int deleteByPrimaryKey(@Param("id") Integer id);
@@ -17,4 +19,8 @@ public interface SysRoleMapper {
     int updateByPrimaryKeySelective(SysRole record);
 
     int updateByPrimaryKey(SysRole record);
+
+    List<SysRole> getAll();
+
+    int countByName(@Param("name") String name, @Param("id") Integer id);
 }

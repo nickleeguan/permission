@@ -11,6 +11,8 @@ import com.icode.util.BeanValidator;
 import com.icode.util.IpUtil;
 import com.icode.util.LevelUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,8 @@ import java.util.List;
 
 @Service
 public class SysDeptServiceImpl implements SysDeptService {
+
+    private static final Logger logger = LoggerFactory.getLogger(SysDeptServiceImpl.class);
 
     @Resource
     private SysDeptMapper sysDeptMapper;

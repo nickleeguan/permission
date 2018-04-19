@@ -26,8 +26,8 @@
     insert into sys_role_acl (id, role_id, acl_id, 
       operator, operate_time, operate_ip
       )
-    values (#{record.id,jdbcType=INTEGER}, #{record.roleId,jdbcType=INTEGER}, #{record.aclId,jdbcType=INTEGER},
-      #{record.operator,jdbcType=VARCHAR}, #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{aclId,jdbcType=INTEGER},
+      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.icode.model.SysRoleAcl" >
@@ -92,15 +92,15 @@
         operate_ip = #{operateIp,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{record.id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.icode.model.SysRoleAcl" >
     update sys_role_acl
-    set role_id = #{record.roleId,jdbcType=INTEGER},
-      acl_id = #{record.aclId,jdbcType=INTEGER},
-      operator = #{record.operator,jdbcType=VARCHAR},
-      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
-      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
-    where id = #{record.id,jdbcType=INTEGER}
+    set role_id = #{roleId,jdbcType=INTEGER},
+      acl_id = #{aclId,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

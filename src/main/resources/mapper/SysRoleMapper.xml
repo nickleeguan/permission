@@ -28,9 +28,9 @@
     insert into sys_role (id, name, type, 
       status, remark, operator, 
       operate_time, operate_ip)
-    values (#{record.id,jdbcType=INTEGER}, #{record.name,jdbcType=VARCHAR}, #{record.type,jdbcType=INTEGER}, 
-      #{record.status,jdbcType=INTEGER}, #{record.remark,jdbcType=VARCHAR}, #{record.operator,jdbcType=VARCHAR}, 
-      #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR})
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR},
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.icode.model.SysRole" >
     insert into sys_role
@@ -112,17 +112,31 @@
         operate_ip = #{operateIp,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{record.id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.icode.model.SysRole" >
     update sys_role
-    set name = #{record.name,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      remark = #{record.remark,jdbcType=VARCHAR},
-      operator = #{record.operator,jdbcType=VARCHAR},
-      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
-      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
-    where id = #{record.id,jdbcType=INTEGER}
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    select   <include refid="Base_Column_List"/>
+    from sys_role
+  </select>
+  
+  <select id="countByName" parameterType="map" resultType="int">
+    select count(1)
+    from sys_role
+    where name = #{name}
+    <if test="id != null">
+      and id != #{id}
+    </if>
+  </select>
 </mapper>

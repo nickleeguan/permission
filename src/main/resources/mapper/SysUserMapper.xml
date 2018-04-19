@@ -33,10 +33,10 @@
       mail, password, dept_id, 
       status, remark, operator, 
       operate_time, operate_ip)
-    values (#{record.id,jdbcType=INTEGER}, #{record.username,jdbcType=VARCHAR}, #{record.telephone,jdbcType=VARCHAR},
-      #{record.mail,jdbcType=VARCHAR}, #{record.password,jdbcType=VARCHAR}, #{record.deptId,jdbcType=INTEGER},
-      #{record.status,jdbcType=INTEGER}, #{record.remark,jdbcType=VARCHAR}, #{record.operator,jdbcType=VARCHAR},
-      #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR})
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR},
+      #{mail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{deptId,jdbcType=INTEGER},
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR},
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.icode.model.SysUser" >
     insert into sys_user
@@ -149,11 +149,11 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.icode.model.SysUser" >
     update sys_user
-    set username = #{record.username,jdbcType=VARCHAR},
-      telephone = #{record.telephone,jdbcType=VARCHAR},
-      mail = #{record.mail,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      dept_id = #{record.deptId,jdbcType=INTEGER},
+    set username = #{username,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       operator = #{operator,jdbcType=VARCHAR},

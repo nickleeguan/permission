@@ -31,10 +31,10 @@
       level, seq, status, 
       remark, operator, operate_time, 
       operate_ip)
-    values (#{record.id,jdbcType=INTEGER}, #{record.name,jdbcType=VARCHAR}, #{record.parentId,jdbcType=INTEGER},
-      #{record.level,jdbcType=VARCHAR}, #{record.seq,jdbcType=INTEGER}, #{record.status,jdbcType=INTEGER},
-      #{record.remark,jdbcType=VARCHAR}, #{record.operator,jdbcType=VARCHAR}, #{record.operateTime,jdbcType=TIMESTAMP},
-      #{record.operateIp,jdbcType=VARCHAR})
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER},
+      #{level,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+      #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP},
+      #{operateIp,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.icode.model.SysAclModule" >
     insert into sys_acl_module
