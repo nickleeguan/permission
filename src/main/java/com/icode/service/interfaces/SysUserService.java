@@ -5,6 +5,8 @@ import com.icode.beans.PageResult;
 import com.icode.model.SysUser;
 import com.icode.param.UserParam;
 
+import java.util.List;
+
 public interface SysUserService {
     public void save(UserParam param);
 
@@ -13,4 +15,6 @@ public interface SysUserService {
     SysUser findByKeyword(String keyword);
 
     PageResult<SysUser> getPageByDeptId(int deptId, PageQuery pageQuery);
+
+    List<SysUser> getAll();
 }

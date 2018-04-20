@@ -98,4 +98,9 @@ public class SysUserServiceImpl implements SysUserService {
         }
         return new PageResult<SysUser>();
     }
+
+    @Override
+    public List<SysUser> getAll() {
+        return sysUserMapper.getAll();
+    }
 }
