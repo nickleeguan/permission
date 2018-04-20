@@ -1,9 +1,13 @@
 package com.icode.controller;
 
+import com.google.common.collect.Maps;
 import com.icode.beans.PageQuery;
 import com.icode.beans.PageResult;
 import com.icode.common.JsonData;
+import com.icode.model.SysRole;
 import com.icode.param.UserParam;
+import com.icode.service.interfaces.SysRoleService;
+import com.icode.service.interfaces.SysTreeService;
 import com.icode.service.interfaces.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.print.attribute.standard.JobSheets;
+import java.util.Map;
 
 @Controller
 @RequestMapping("sys/user")
@@ -23,6 +28,12 @@ public class SysUserController {
 
     @Autowired
     private SysUserService sysUserService;
+
+    @Autowired
+    private SysTreeService sysTreeService;
+
+    @Autowired
+    private SysRoleService sysRoleService;
 
     @RequestMapping("save.json")
     @ResponseBody
@@ -44,5 +55,14 @@ public class SysUserController {
                          @ModelAttribute PageQuery pageQuery){
         PageResult result = sysUserService.getPageByDeptId(deptId, pageQuery);
         return JsonData.success(result);
+    }
+
+    @RequestMapping("acls.json")
+    @ResponseBody
+    public JsonData acls(@RequestParam("userId") int userId){
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("acls", sysTreeService.userAclTree(userId));
+        map.put("roles", sysRoleService.getRoleListByUserId(userId));
+        return JsonData.success(map);
     }
 }

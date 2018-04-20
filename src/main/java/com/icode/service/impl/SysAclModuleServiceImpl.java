@@ -2,6 +2,7 @@ package com.icode.service.impl;
 
 import com.google.common.base.Preconditions;
 import com.icode.common.RequestHolder;
+import com.icode.dao.SysAclMapper;
 import com.icode.dao.SysAclModuleMapper;
 import com.icode.exception.ParamException;
 import com.icode.model.SysAclModule;
@@ -24,6 +25,9 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
 
     @Resource
     private SysAclModuleMapper sysAclModuleMapper;
+
+    @Resource
+    private SysAclMapper sysAclMapper;
 
     public void save(AclModuleParam param) {
         BeanValidator.check(param);
@@ -92,5 +96,21 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
             return null;
         }
         return aclModule.getLevel();
+    }
+
+    @Override
+    public void delete(int aclModuleId) {
+        SysAclModule aclModule = sysAclModuleMapper.selectByPrimaryKey(aclModuleId);
+        Preconditions.checkNotNull(aclModule, "待删除的权限模块不存在");
+
+        if (sysAclModuleMapper.countByParentId(aclModuleId) > 0){
+            throw new ParamException("待删除的权限模块下存在子模块不可删除");
+        }
+
+        if (sysAclMapper.countByAclModuleId(aclModuleId) > 0){
+            throw new ParamException("待删除的权限模块下存在权限点不可删除");
+        }
+
+        sysAclModuleMapper.deleteByPrimaryKey(aclModuleId);
     }
 }

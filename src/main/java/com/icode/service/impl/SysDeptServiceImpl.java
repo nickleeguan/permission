@@ -3,6 +3,7 @@ package com.icode.service.impl;
 import com.google.common.base.Preconditions;
 import com.icode.common.RequestHolder;
 import com.icode.dao.SysDeptMapper;
+import com.icode.dao.SysUserMapper;
 import com.icode.exception.ParamException;
 import com.icode.model.SysDept;
 import com.icode.param.DeptParam;
@@ -27,6 +28,9 @@ public class SysDeptServiceImpl implements SysDeptService {
 
     @Resource
     private SysDeptMapper sysDeptMapper;
+
+    @Resource
+    private SysUserMapper sysUserMapper;
 
     public void save(DeptParam param){
         BeanValidator.check(param);
@@ -94,5 +98,21 @@ public class SysDeptServiceImpl implements SysDeptService {
             return null;
         }
         return dept.getLevel();
+    }
+
+    @Override
+    public void delete(int deptId) {
+        SysDept sysDept = sysDeptMapper.selectByPrimaryKey(deptId);
+        Preconditions.checkNotNull(sysDept, "待删除的部门不存在!");
+
+        if (sysDeptMapper.countByParentId(deptId) > 0){
+            throw new ParamException("当前部门下有子部门无法删除");
+        }
+
+        if (sysUserMapper.countByDeptId(deptId) > 0){
+            throw new ParamException("当前部门下存在用户无法删除");
+        }
+
+        sysDeptMapper.deleteByPrimaryKey(deptId);
     }
 }
