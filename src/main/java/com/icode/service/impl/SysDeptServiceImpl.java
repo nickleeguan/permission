@@ -8,12 +8,14 @@ import com.icode.exception.ParamException;
 import com.icode.model.SysDept;
 import com.icode.param.DeptParam;
 import com.icode.service.interfaces.SysDeptService;
+import com.icode.service.interfaces.SysLogService;
 import com.icode.util.BeanValidator;
 import com.icode.util.IpUtil;
 import com.icode.util.LevelUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,9 @@ public class SysDeptServiceImpl implements SysDeptService {
     @Resource
     private SysUserMapper sysUserMapper;
 
+    @Autowired
+    private SysLogService sysLogService;
+
     public void save(DeptParam param){
         BeanValidator.check(param);
         if (checkExist(param.getParentId(), param.getName(), param.getId())){
@@ -45,6 +50,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         dept.setOperateTime(new Date());
 
         sysDeptMapper.insertSelective(dept);
+        sysLogService.saveDeptLog(null, dept);
     }
 
     public void update(DeptParam param) {
@@ -63,6 +69,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         after.setOperateTime(new Date());
 
         updateWithChild(before, after);
+        sysLogService.saveDeptLog(before, after);
     }
 
     @Transactional

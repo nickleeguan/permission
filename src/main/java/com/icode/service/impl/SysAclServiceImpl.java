@@ -9,6 +9,7 @@ import com.icode.exception.ParamException;
 import com.icode.model.SysAcl;
 import com.icode.param.AclParam;
 import com.icode.service.interfaces.SysAclService;
+import com.icode.service.interfaces.SysLogService;
 import com.icode.util.BeanValidator;
 import com.icode.util.IpUtil;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,9 @@ public class SysAclServiceImpl implements SysAclService {
 
     @Autowired
     private SysAclMapper sysAclMapper;
+
+    @Resource
+    private SysLogService sysLogService;
 
     public void saveAcl(AclParam param) {
         BeanValidator.check(param);
@@ -42,6 +47,7 @@ public class SysAclServiceImpl implements SysAclService {
         acl.setOperateTime(new Date());
         acl.setOperator(RequestHolder.getCurrentUser().getUsername());
         sysAclMapper.insert(acl);
+        sysLogService.saveAclLog(null, acl);
     }
 
     private boolean checkExist(int aclModuleId, String name, Integer id){
@@ -64,6 +70,7 @@ public class SysAclServiceImpl implements SysAclService {
         after.setOperateTime(new Date());
         after.setOperator(RequestHolder.getCurrentUser().getUsername());
         sysAclMapper.updateByPrimaryKeySelective(after);
+        sysLogService.saveAclLog(before, after);
     }
 
     public String generateCode(){

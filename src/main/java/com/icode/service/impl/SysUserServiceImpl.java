@@ -8,6 +8,7 @@ import com.icode.dao.SysUserMapper;
 import com.icode.exception.ParamException;
 import com.icode.model.SysUser;
 import com.icode.param.UserParam;
+import com.icode.service.interfaces.SysLogService;
 import com.icode.service.interfaces.SysUserService;
 import com.icode.util.BeanValidator;
 import com.icode.util.IpUtil;
@@ -27,6 +28,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Resource
     private SysUserMapper sysUserMapper;
+
+    @Resource
+    private SysLogService sysLogService;
 
     public void save(UserParam param) {
         BeanValidator.check(param);
@@ -52,6 +56,7 @@ public class SysUserServiceImpl implements SysUserService {
         // TODO:send Email
 
         sysUserMapper.insert(user);
+        sysLogService.saveUserLog(null, user);
     }
 
     public void update(UserParam param){
@@ -73,7 +78,7 @@ public class SysUserServiceImpl implements SysUserService {
         after.setOperateTime(new Date());
         after.setOperator(RequestHolder.getCurrentUser().getUsername());
         sysUserMapper.updateByPrimaryKeySelective(after);
-
+        sysLogService.saveUserLog(before, after);
     }
 
     public boolean checkEmailExist(String mail, Integer userId){

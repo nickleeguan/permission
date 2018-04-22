@@ -11,6 +11,7 @@ import com.icode.exception.ParamException;
 import com.icode.model.SysRole;
 import com.icode.model.SysUser;
 import com.icode.param.RoleParam;
+import com.icode.service.interfaces.SysLogService;
 import com.icode.service.interfaces.SysRoleService;
 import com.icode.util.BeanValidator;
 import com.icode.util.IpUtil;
@@ -41,6 +42,9 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Resource
     private SysUserMapper sysUserMapper;
 
+    @Resource
+    private SysLogService sysLogService;
+
     public void saveRole(RoleParam param) {
         BeanValidator.check(param);
         if (checkExist(param.getName(), param.getId())){
@@ -54,6 +58,7 @@ public class SysRoleServiceImpl implements SysRoleService {
         role.setOperateTime(new Date());
 
         sysRoleMapper.insertSelective(role);
+        sysLogService.saveRoleLog(null, role);
     }
 
     public void updateRole(RoleParam param) {
@@ -71,6 +76,8 @@ public class SysRoleServiceImpl implements SysRoleService {
         after.setOperateTime(new Date());
 
         sysRoleMapper.updateByPrimaryKeySelective(after);
+
+        sysLogService.saveRoleLog(before, after);
     }
 
     public List<SysRole> getAll(){

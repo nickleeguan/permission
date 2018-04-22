@@ -7,6 +7,7 @@ import com.icode.dao.SysRoleUserMapper;
 import com.icode.dao.SysUserMapper;
 import com.icode.model.SysRoleUser;
 import com.icode.model.SysUser;
+import com.icode.service.interfaces.SysLogService;
 import com.icode.service.interfaces.SysRoleUserService;
 import com.icode.util.IpUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -31,6 +32,9 @@ public class SysRoleUserServiceImpl implements SysRoleUserService {
     @Resource
     private SysUserMapper sysUserMapper;
 
+    @Resource
+    private SysLogService sysLogService;
+
     @Override
     public List<SysUser> getListByRoleId(int roleId) {
         logger.debug("获取拥有当前角色的用户");
@@ -54,6 +58,7 @@ public class SysRoleUserServiceImpl implements SysRoleUserService {
         }
 
         updateRoleUsers(roleId, userIdList);
+        sysLogService.saveRoleUserLog(roleId, originUserIdList, userIdList);
     }
 
     @Transactional

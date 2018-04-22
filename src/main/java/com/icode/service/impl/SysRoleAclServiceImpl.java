@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import com.icode.common.RequestHolder;
 import com.icode.dao.SysRoleAclMapper;
 import com.icode.model.SysRoleAcl;
+import com.icode.service.interfaces.SysLogService;
 import com.icode.service.interfaces.SysRoleAclService;
 import com.icode.util.IpUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -26,6 +27,9 @@ public class SysRoleAclServiceImpl implements SysRoleAclService {
     @Resource
     private SysRoleAclMapper sysRoleAclMapper;
 
+    @Resource
+    private SysLogService sysLogService;
+
     @Override
     public void changeRoleAcls(Integer roleId, List<Integer> aclIdList) {
         //取出已有权限
@@ -42,6 +46,8 @@ public class SysRoleAclServiceImpl implements SysRoleAclService {
         }
 
         updateRoleAcls(roleId, aclIdList);
+
+        sysLogService.saveRoleAclLog(roleId, originAclIdList, aclIdList);
     }
 
     @Transactional

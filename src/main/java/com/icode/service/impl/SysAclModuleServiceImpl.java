@@ -9,6 +9,7 @@ import com.icode.model.SysAclModule;
 import com.icode.model.SysDept;
 import com.icode.param.AclModuleParam;
 import com.icode.service.interfaces.SysAclModuleService;
+import com.icode.service.interfaces.SysLogService;
 import com.icode.util.BeanValidator;
 import com.icode.util.IpUtil;
 import com.icode.util.LevelUtil;
@@ -29,6 +30,9 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
     @Resource
     private SysAclMapper sysAclMapper;
 
+    @Resource
+    private SysLogService sysLogService;
+
     public void save(AclModuleParam param) {
         BeanValidator.check(param);
         if (checkExist(param.getParentId(), param.getName(), param.getId())){
@@ -44,6 +48,7 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
         aclModule.setOperateTime(new Date());
 
         sysAclModuleMapper.insert(aclModule);
+        sysLogService.saveAclModuleLog(null, aclModule);
     }
 
     public void update(AclModuleParam param) {
@@ -63,6 +68,7 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
         after.setOperateTime(new Date());
 
         updateWithChild(before, after);
+        sysLogService.saveAclModuleLog(before, after);
     }
 
     @Transactional
