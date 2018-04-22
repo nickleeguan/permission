@@ -28,14 +28,12 @@ public class LoginFilter implements Filter{
         if (user == null){
             String path = "/signin.jsp";
             resp.sendRedirect(path);
-            return;
         }
 
         RequestHolder.add(req);
         RequestHolder.add(user);
 
         filterChain.doFilter(servletRequest, servletResponse);
-        return;
     }
 
     public void destroy() {
